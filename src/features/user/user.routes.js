@@ -5,10 +5,13 @@ const app = express.Router();
 
 app.post("/signup", async (req, res) => {
   try {
-    await User.create(req.body);
+    let reqUser = req.body;
+    reqUser.type='customer';
+    let user = await User.create(reqUser);
     res.send({
       error: false,
       message: "Your account has been created",
+      token: `${user._id}-${user.email}-${user.type}-${user.password}`,
     });
   } catch (e) {
     res.send({
