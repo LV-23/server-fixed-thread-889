@@ -20,6 +20,7 @@ app.post("/signup", async (req, res) => {
         error: false,
         message: "Your account has been created",
         token: `${user._id}-${user.email}-${user.type}-${user.password}`,
+        type:user.type
       });
     } catch (e) {
       console.log(e)
@@ -44,6 +45,7 @@ app.post("/login", async (req, res) => {
           error: false,
           message: "You've logged in successfully.",
           token: `${user._id}-${user.email}-${user.type}-${user.password}`,
+          type:user.type
         });
       }
     } catch (e) {
