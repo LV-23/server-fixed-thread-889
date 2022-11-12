@@ -21,7 +21,6 @@ app.get("/:id", authMiddleWare, async (req, res) => {
 
 app.post("/", async (req, res) => {
   const { product, user, quantity, delivered } = req.body;
-  console.log(req.body);
   try {
     let cart = await Cart.create({ product, user, quantity, delivered });
     res.status(200).send(cart);
