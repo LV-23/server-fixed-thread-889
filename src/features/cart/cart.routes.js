@@ -5,7 +5,6 @@ const authMiddleWare = require("../../authMiddleware/authMiddleware");
 const app = express.Router();
 
 app.get("/:id", authMiddleWare, async (req, res) => {
-  console.log(req.params.id);
   if (req.id !== req.params.id) {
     return res
       .status(401)
@@ -57,9 +56,10 @@ app.delete("/:cartId", authMiddleWare, async (req, res) => {
   }
 });
 
-app.delete("emptyCart/:userID", authMiddleWare, async (req, res) => {
+app.post("/empty/:userID", authMiddleWare, async (req, res) => {
   try {
     // await Cart.findByIdAndDelete(req.params.cartId);
+
     await Cart.deleteMany({user:req.params.userID})
     res
       .status(200)
