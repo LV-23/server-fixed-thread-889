@@ -57,4 +57,16 @@ app.delete("/:cartId", authMiddleWare, async (req, res) => {
   }
 });
 
+app.delete("emptyCart/:userID", authMiddleWare, async (req, res) => {
+  try {
+    // await Cart.findByIdAndDelete(req.params.cartId);
+    await Cart.deleteMany({user:req.params.userID})
+    res
+      .status(200)
+      .send({ error: false, message: "cart emptied successfully" });
+  } catch (e) {
+    res.status(401).send({ error: true, message: "Something went wrong" });
+  }
+});
+
 module.exports = app;
