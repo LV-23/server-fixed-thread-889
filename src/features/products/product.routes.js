@@ -61,7 +61,7 @@ app.post("/", authMiddleWare, async (req, res) => {
 
 app.patch("/:id", authMiddleWare, async (req, res) => {
   //check if the user is seller or customer
-  if (req.role !== "seller") {
+  if (req.userType !== "seller") {
     res.status(401).send({
       error: true,
       message: "you don't have authorization to add products",
